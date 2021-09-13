@@ -15,7 +15,7 @@ parameters = { id: issue_id
 
 deposit_call = Faraday.post(url, parameters.to_json, {})
 if deposit_call.status.between?(200, 299)
-  puts "Deposit looks good."
+  system("echo 'Journal responded. Deposit looks good'")
 else
   raise "!! ERROR: Something went wrong with this deposit when calling #{journal_url}"
 end
