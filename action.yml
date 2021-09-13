@@ -12,7 +12,20 @@ runs:
         cache-version: upload-crossref
         bundler: Gemfile.lock
         working-directory: ${{ github.action_path }}
-
+    - name: Deposit with Open Journals
+      id: deposit_OJ
+      shell: bash
+      env:
+        BUNDLE_GEMFILE: ${{ github.action_path }}/Gemfile
+      run: |
+        bundle exec ruby ${{ github.action_path }}/deposit_with_openjournals.rb
+    - name: Deposit with Crossref
+      id: deposit_crossref
+      shell: bash
+      env:
+        BUNDLE_GEMFILE: ${{ github.action_path }}/Gemfile
+      run: |
+        bundle exec ruby ${{ github.action_path }}/deposit_with_crossref.rb
 branding:
   icon: archive
   color: green
