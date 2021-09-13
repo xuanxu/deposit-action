@@ -1,6 +1,15 @@
 name: Deposit API calls
 description: Deposit with Open Journals and Crossref
-
+inputs:
+  journal_url:
+    description: The url of the journal
+    required: true
+  journal_secret:
+    description: The access token to be used to upload files
+    required: true
+  issue_id:
+    description: The issue number of the submission
+    required: true
 runs:
   using: "composite"
   steps:
@@ -16,6 +25,9 @@ runs:
       id: deposit_OJ
       shell: bash
       env:
+        JOURNAL_URL: ${{ inputs.journal_url }}
+        JOURNAL_SECRET: ${{ inputs.journal_secret }}
+        ISSUE_ID: ${{ inputs.issue_id }}
         BUNDLE_GEMFILE: ${{ github.action_path }}/Gemfile
       run: |
         bundle exec ruby ${{ github.action_path }}/deposit_with_openjournals.rb
