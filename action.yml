@@ -10,6 +10,15 @@ inputs:
   issue_id:
     description: The issue number of the submission
     required: true
+  crossref_filepath:
+    description: The complete filepath of the Crossref XML file
+    required: true
+  crossref_username:
+    description: Crossref username doing the deposit
+    required: true
+  crossref_password:
+    description: Crossref password
+    required: true
 runs:
   using: "composite"
   steps:
@@ -25,6 +34,9 @@ runs:
       id: deposit_crossref
       shell: bash
       env:
+        CROSSREF_FILEPATH: ${{ inputs.crossref_filepath }}
+        CROSSREF_USERNAME: ${{ inputs.crossref_username }}
+        CROSSREF_PASSWORD: ${{ inputs.crossref_password }}
         BUNDLE_GEMFILE: ${{ github.action_path }}/Gemfile
       run: |
         bundle exec ruby ${{ github.action_path }}/deposit_with_crossref.rb
