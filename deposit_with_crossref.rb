@@ -8,7 +8,7 @@ crossref_url = "https://doi.crossref.org"
 crossref_path = "/servlet/deposit"
 params = { login_id: crossref_username, login_passwd: crossref_password }
 
-if File.exists?("#{paper.directory}/#{paper.filename_doi}.crossref.xml")
+if File.exists?(crossref_filepath)
   system("echo 'Depositing with Crossref...'")
   conn = Faraday.new(crossref_url) do |f|
     f.request :multipart
