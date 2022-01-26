@@ -10,13 +10,17 @@ inputs:
   crossref_password:
     description: Crossref password
     required: true
+  crossref_mode:
+    description: Use test or production crossref calls
+    required: false
+    default: ""
 runs:
   using: "composite"
   steps:
     - name: Install Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.0.3
+        ruby-version: 3.1.0
         bundler-cache: true
         cache-version: deposit-with-crossref
         bundler: Gemfile.lock
@@ -28,6 +32,7 @@ runs:
         CROSSREF_FILEPATH: ${{ inputs.crossref_filepath }}
         CROSSREF_USERNAME: ${{ inputs.crossref_username }}
         CROSSREF_PASSWORD: ${{ inputs.crossref_password }}
+        CROSSREF_MODE: ${{ inputs.crossref_mode }}
         BUNDLE_GEMFILE: ${{ github.action_path }}/Gemfile
       run: |
         bundle exec ruby ${{ github.action_path }}/deposit_with_crossref.rb
