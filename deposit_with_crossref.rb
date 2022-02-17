@@ -25,9 +25,11 @@ if File.exists?(crossref_filepath)
   if deposit_call.status.between?(200, 299)
     system("echo 'Deposit looks good.'")
   else
+    system("echo 'CUSTOM_ERROR=Could not deposit with Crossref.' >> $GITHUB_ENV")
     raise "!! ERROR: Something went wrong with this deposit call to Crossref"
   end
 else
+  system("echo 'CUSTOM_ERROR=Could not deposit with Crossref.' >> $GITHUB_ENV")
   raise "!! ERROR: Can't deposit Crossref metadata - deposit XML is missing"
 end
 
