@@ -1,4 +1,5 @@
 require "faraday"
+require "faraday/multipart"
 
 crossref_filepath = ENV['CROSSREF_FILEPATH']
 crossref_username = ENV['CROSSREF_USERNAME']

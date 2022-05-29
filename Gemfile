@@ -1,4 +1,5 @@
 source "https://rubygems.org"
 
-gem "faraday", "~> 1.10.0"
+gem "faraday"
+gem "faraday-multipart"
 
