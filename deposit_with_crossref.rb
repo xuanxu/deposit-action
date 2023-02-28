@@ -12,7 +12,7 @@ params = { login_id: crossref_username, login_passwd: crossref_password }
 
 crossref_url = "https://test.crossref.org" if mode.to_s.downcase == "test"
 
-if File.exists?(crossref_filepath)
+if File.exist?(crossref_filepath)
   system("echo 'Depositing with Crossref...'")
   conn = Faraday.new(crossref_url) do |f|
     f.request :multipart
